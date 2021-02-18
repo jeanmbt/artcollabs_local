@@ -70,7 +70,7 @@ puts "🆕🧾-- Creating Projects"
 counter = 0
 3.times do 
   counter = counter + 1
-  Project.create(title: " DUMMY 1 - #{Faker::JapaneseMedia::StudioGhibli.quote}", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quorum sine causa fieri nihil putandum est. Quamquam in hac divisione rem ipsam prorsus probo, elegantiam desidero. Satis est ad hoc responsum. Quid dubitas igitur mutare principia naturae? Duo Reges: constructio interrete.
+  Project.create(title: " DUMMY 1 - #{Faker::App.name}", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quorum sine causa fieri nihil putandum est. Quamquam in hac divisione rem ipsam prorsus probo, elegantiam desidero. Satis est ad hoc responsum. Quid dubitas igitur mutare principia naturae? Duo Reges: constructio interrete.
 
   Experiamur igitur, inquit, etsi habet haec Stoicorum ratio difficilius quiddam et obscurius. Philosophi autem in suis lectulis plerumque moriuntur. Disserendi artem nullam habuit. Erit enim instructus ad mortem contemnendam, ad exilium, ad ipsum etiam dolorem.
   
@@ -83,7 +83,7 @@ puts " \n "
 counter = 0
 3.times do 
   counter = counter + 1
-  Project.create(title: " DUMMY 2 - #{Faker::JapaneseMedia::StudioGhibli.quote}", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quorum sine causa fieri nihil putandum est. Quamquam in hac divisione rem ipsam prorsus probo, elegantiam desidero. Satis est ad hoc responsum. Quid dubitas igitur mutare principia naturae? Duo Reges: constructio interrete.
+  Project.create(title: " DUMMY 2 - #{Faker::App.name}", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quorum sine causa fieri nihil putandum est. Quamquam in hac divisione rem ipsam prorsus probo, elegantiam desidero. Satis est ad hoc responsum. Quid dubitas igitur mutare principia naturae? Duo Reges: constructio interrete.
 
   Experiamur igitur, inquit, etsi habet haec Stoicorum ratio difficilius quiddam et obscurius. Philosophi autem in suis lectulis plerumque moriuntur. Disserendi artem nullam habuit. Erit enim instructus ad mortem contemnendam, ad exilium, ad ipsum etiam dolorem.
   
@@ -96,7 +96,7 @@ puts " \n "
 counter = 0
 10.times do 
   counter = counter + 1
-  Project.create(title: "#{Faker::JapaneseMedia::StudioGhibli.quote}", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quorum sine causa fieri nihil putandum est. Quamquam in hac divisione rem ipsam prorsus probo, elegantiam desidero. Satis est ad hoc responsum. Quid dubitas igitur mutare principia naturae? Duo Reges: constructio interrete.
+  Project.create(title: "#{Faker::App.name}", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quorum sine causa fieri nihil putandum est. Quamquam in hac divisione rem ipsam prorsus probo, elegantiam desidero. Satis est ad hoc responsum. Quid dubitas igitur mutare principia naturae? Duo Reges: constructio interrete.
 
   Experiamur igitur, inquit, etsi habet haec Stoicorum ratio difficilius quiddam et obscurius. Philosophi autem in suis lectulis plerumque moriuntur. Disserendi artem nullam habuit. Erit enim instructus ad mortem contemnendam, ad exilium, ad ipsum etiam dolorem.
   

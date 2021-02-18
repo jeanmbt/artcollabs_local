@@ -33,6 +33,7 @@ gem 'devise'
 # GEMS WE INSTALLED
 
 gem 'acts-as-taggable-on', '~> 7.0'
+gem 'acts_as_favoritor'
 gem 'pundit'
 # .env
 gem 'dotenv-rails', groups: [:development, :test]
