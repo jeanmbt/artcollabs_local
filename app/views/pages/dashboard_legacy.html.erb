@@ -1,0 +1,42 @@
+<div class="show-container">
+
+  <h1>Dashboard</h1>
+
+  <div class="tab-container">
+    <h2>My projects</h2>
+    <h2><a href="#" class="tab">My collaborations</a></h2>
+  </div>
+
+  <hr>
+
+<h6>My projects</h6>
+<% @projects.each do |project| %>
+  <br><%= link_to "#{project.title}", project_path(project) %>
+<% end %>
+
+<br>--------------------- <br>
+<h6>My collabs</h6>
+<% @collaborations.each do |collaboration| %>
+  <br>as <%= collaboration.role %> on
+  <%= link_to "#{collaboration.project.title}", project_path(collaboration.project) %>
+  <br>
+  <%= button_to "edit", edit_project_collaboration_path(collaboration.project, collaboration) %>
+  <br>
+  <%= button_to "cancel your collaboration request", project_collaboration_path(collaboration.project, collaboration), method: :delete, data: { confirm: "delete collab request ?" } %>
+<% end %>
+
+<br>--------------------- <br>
+<h6>Collaborations to my projects</h6>
+<h2>pending</h2>
+
+<!--PENDING COLLABS-->
+<% @pending_collabs.each do |collaboration| %>
+    <h6><%= collaboration.user.username %> wants to collab as <%= collaboration.role  %> on <%= link_to "#{collaboration.project.title}", project_path(collaboration.project) %></h6>
+
+    <%= button_to  "Confirm", confirm_path(collaboration), method: :patch, data: { confirm: "Are you sure you want to accept this collaborator?" }%>
+    <br>
+    <%= button_to  "  Deny  ", deny_path(collaboration), method: :patch, data: { confirm: "Are you sure you want to deny this collaborator?" } %>
+    <hr>
+<% end %>
+------------------------------------
+
