@@ -138,7 +138,4 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def is_show?
-    current_page?(controller: 'projects', action: 'show')
-  end
 end

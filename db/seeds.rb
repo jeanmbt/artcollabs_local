@@ -153,6 +153,7 @@ counter = 0
   random_project.photo.attach(io: image, filename: "name", content_type: "image/png")
   random_project.tag_list = tag_generator
   random_project.save
+  sleep(1)
 end
 
 modular1978 = Project.new(title: "1978", description: "Wendy Carlos (born Walter Carlos; November 14, 1939) is an American musician and composer best known for her electronic music and film scores. Born and raised in Rhode Island, Carlos studied physics and music at Brown University before moving to New York City in 1962 to study music composition at Columbia University. Studying and working with various electronic musicians and technicians at the city's Columbia-Princeton Electronic Music Center, she helped in the development of the Moog synthesizer, the first commercially available keyboard instrument created by Robert Moog. 
