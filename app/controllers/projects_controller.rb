@@ -16,8 +16,16 @@ class ProjectsController < ApplicationController
 
   def index
     @favourite_project = FavouriteProject.new
-    @query = (policy_scope(Project.search_by_title_budget_location_and_description(params[:query])) +
-              policy_scope(Project.tagged_with(params[:query])))
+    if params[:query]
+      @query = policy_scope(Project.search_by_title_budget_location_and_description(params[:query]))
+    elsif params[:tags]
+      @query = policy_scope(Project.all).filter do |project|
+        (project.tags.pluck(:name) & params[:tags]).length > 0
+      end
+    end
+
+    # @query = (policy_scope(Project.search_by_title_budget_location_and_description(params[:query])) +
+    #          policy_scope(Project.tagged_with(params[:query])))
     index_logic
   end
 

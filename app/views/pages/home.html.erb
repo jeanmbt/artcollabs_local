@@ -26,7 +26,7 @@
   <% @collections.each_with_index do |collection, index| %>
     <% if index < @collections.length - 1 %>
 
-      <%= link_to controller: "projects", query: collection do %>
+      <%= link_to controller: "projects", tags: collection do %>
 
         <div class="collection-card">
           <div class="collection-title">
