@@ -20,9 +20,12 @@ class ProjectsController < ApplicationController
       @query = policy_scope(Project.search_by_title_budget_location_and_description(params[:query]))
     elsif params[:tags]
       @query = policy_scope(Project.all).filter do |project|
+        matching_tags = (project.tags.pluck(:name) & params[:tags])
         (project.tags.pluck(:name) & params[:tags]).length > 0
       end
     end
+
+    # raise
 
     # @query = (policy_scope(Project.search_by_title_budget_location_and_description(params[:query])) +
     #          policy_scope(Project.tagged_with(params[:query])))
@@ -151,10 +154,12 @@ class ProjectsController < ApplicationController
       @searched = params[:query]
       if @query.empty?
         redirect_to projects_path(search: :noresults, searched: @searched)
-        flash[:notice] = " No projects with #{params[:query]}"
+        flash[:notice] = "No projects with #{params[:query]}"
       else
         @projects = Kaminari.paginate_array(@query).page(params[:page])
       end
+    elsif params[:tags].present?
+      @projects = @query
     else
       @projects = policy_scope(Project).order(created_at: :desc).page (params[:page])
     end
