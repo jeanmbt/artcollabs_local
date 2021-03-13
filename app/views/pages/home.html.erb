@@ -23,21 +23,12 @@
 </div>
 
 <div class="home-collection">
-  <% @collections.each_with_index do |collection, index| %>
-    <% if index < @collections.length - 1 %>
 
-      <%= link_to controller: "projects", query: collection do %>
+  <div class="collection-card" id="card1"></div>
+  <div class="collection-card" id="card2"></div>
+  <div class="collection-card" id="card3"></div>
+  <div class="collection-card" id="card4"></div>
 
-        <div class="collection-card">
-          <div class="collection-title">
-            <%= @collections.last[index] %>
-          </div>
-        </div>
-
-      <% end %>
-
-    <% end %>
-  <% end %>
 </div>
 
 <% end %>
