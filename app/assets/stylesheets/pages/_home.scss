@@ -86,11 +86,18 @@ input[type="text"]:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+    &:hover {
+      transform: scale(1.1);
+      transition: 0.7s;
+      a {
+        color: white !important;
+  
+      }
+    }
     a {
       color: $warm-red !important;
-      &:hover {
-        color: white !important;
-      }
+      display: block;
+      padding: 320px 5px; ;
     }
 }
 
