@@ -41,7 +41,7 @@
     <div class="profile-right">
       <div class="profile-pic user-avatar">
           <% if @user.avatar.attached? %>
-            <%= image_tag @user.avatar %>
+            <%= cl_image_tag @user.avatar.key %>
           <% else %>
             <%= render "shared/avatar" %>
           <% end %>

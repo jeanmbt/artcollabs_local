@@ -10,7 +10,7 @@
       <div class="author">
         <%= link_to profile_path(message.user) do %>
           <% if message.user.avatar.attached? %>
-            <%= image_tag message.user.avatar %>
+            <%= cl_image_tag message.user.avatar.key %>
           <% else %>
             <%= render "shared/avatar" %>
           <% end %>

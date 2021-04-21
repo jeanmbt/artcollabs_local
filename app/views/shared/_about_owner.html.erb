@@ -49,7 +49,7 @@
                     <div class="member user-avatar">
                       <%= link_to profile_path(collaboration.user), class: "a-member" do %>
                         <% if collaboration.user.avatar.attached? %>
-                          <%= image_tag collaboration.user.avatar %>
+                          <%= cl_image_tag collaboration.user.avatar.key %>
                         <% else %>
                           <div class="avatar-member">
                             <%= render "shared/avatar" %>
