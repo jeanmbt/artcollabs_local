@@ -74,7 +74,8 @@ input[type="text"]:focus {
 
 .collection-card {
   border-radius: 20px;
-  width: 10rem;
+  width: clamp(10rem, 15rem, 20rem);
+  margin: 16px;
   height: 360px;
   background: $light-blue;
   background-position: center center;
