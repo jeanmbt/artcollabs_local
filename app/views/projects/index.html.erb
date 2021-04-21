@@ -15,7 +15,7 @@
       <%= link_to project_path(project) do %>
         <div class="card-image">
           <% if project.photo.attached? %>
-            <%= image_tag project.photo %>
+            <%= cl_image_tag project.photo.key %>
           <% else %>
             <%= image_tag "clouds.jpg" %>
           <% end %>
@@ -37,7 +37,7 @@
       <div class="card-footer user-avatar">
         <%= link_to profile_path(project.user), class: "a-footer" do %>
           <% if project.user.avatar.attached? %>
-            <%= image_tag project.user.avatar %>
+            <%= cl_image_tag project.user.avatar.key %>
           <% else %>
             <div class="avatar-member">
               <%= render "shared/avatar" %>
