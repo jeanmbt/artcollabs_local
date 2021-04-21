@@ -5,12 +5,7 @@ class PagesController < ApplicationController
   def home
     @projects = policy_scope(Project).order(created_at: :desc)
     # Collections
-    @group_shows = ["groupshow", "group show", "exhibition", "exhibit"]
-    @trending_topics = ["gender", "identity", "video art", "video", "masculinity", "virtual", "immersive", "immersion"]
-    @joint_works = ["jointworks", "joint works"]
-    @paid_roles = ["low", "medium", "high"]
-    @collection_titles = ["Group Shows", "Trending Topics", "Joint Works", "Paid Roles"]
-    @collections = [@group_shows, @trending_topics, @joint_works, @paid_roles, @collection_titles]
+    @collections = ["Group-Shows", "Dance", "Video", "Gender"]
   end
 
   def dashboard

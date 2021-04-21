@@ -23,20 +23,15 @@
 </div>
 
 <div class="home-collection">
-  <% @collections.each_with_index do |collection, index| %>
-    <% if index < @collections.length - 1 %>
+  <% @collections.each do |collection| %>
+      
 
-      <%= link_to controller: "projects", query: collection do %>
-
-        <div class="collection-card">
-          <div class="collection-title">
-            <%= @collections.last[index] %>
+        <div class="collection-card" style='background-image: url("https://source.unsplash.com/featured?<%= collection %>")'>
+          <div class="collection-title" >
+            <%= link_to "#{collection.gsub("-", " ")}", projects_path( query: collection.gsub("-", " "))%>
           </div>
         </div>
 
-      <% end %>
-
-    <% end %>
   <% end %>
 </div>
 
