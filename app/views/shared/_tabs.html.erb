@@ -1,0 +1,59 @@
+
+
+<% if (@user_type == :owner || @user_type == :collaborator) %>
+
+  <!-- TABS LINKS -->
+  <div class="tab-container-bts">
+    <ul class="nav justify-content-between" id="ProjectsTab" role="tablist">
+      <li class="nav-item tab">
+        <a class="nav-link tab <%= 'active' if !["media", "milestone"].include? params[:tab] %>" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true"><h2>About</h2></a>
+      </li>
+      <li class="nav-item tab">
+        <a class="nav-link tab <%= 'active' if params[:tab] == "milestone" %>" id="timeline-tab" data-toggle="tab" href="#timeline" role="tab" aria-controls="timeline" aria-selected="false"><h2>Timeline</h2></a>
+      </li>
+      <li class="nav-item tab">
+        <a class="nav-link tab <%= 'active' if params[:tab] == "media" %>" id="media-tab" data-toggle="tab" href="#media" role="tab" aria-controls="media" aria-selected="false"><h2>Media</h2></a>
+      </li>
+      <li class="nav-item tab">
+        <a class="nav-link tab" id="chat-tab" data-toggle="tab" href="#chat" role="tab" aria-controls="media" aria-selected="false"><h2>Chat</h2></a>
+      </li>
+
+    </ul>
+
+    <hr>
+
+  </div>
+<% end %>
+    <!-- TAB CONTENTS -->
+    <div class="tab-content" id="ProjectsTabContent">
+      <!-- ABOUT -->
+      <div class="tab-pane fade <%= 'active show' if !["media", "milestone"].include? params[:tab] %>" id="about" role="tabpanel" aria-labelledby="about-tab">
+        <!-- ABOUT - OWNER  -->
+        <% if @user_type == :owner %>
+          <%= render "shared/about_owner" %>
+        <!-- ABOUT - COLLABORATOR  -->
+        <% elsif @user_type == :collaborator %>
+          <%= render "shared/about_collaborator" %>
+        <!-- ABOUT - VISITOR  -->
+        <% elsif (@user_type == :visitor) || (@user_type == :pending) %>
+          <%= render "shared/about_visitor" %>
+        <% end %>
+      </div>
+    </div>
+      <!-- TIMELINE -->
+      <div class="tab-pane fade <%= 'active show' if params[:tab] == "milestone" %>" id="timeline" role="tabpanel" aria-labelledby="timeline-tab">
+        <% if (@user_type == :owner || @user_type == :collaborator) %>
+          <%= render "shared/show_milestones" %>
+        <% end %>
+      </div>
+      <!-- MEDIA -->
+      <div class="tab-pane fade <%= 'active show' if params[:tab] == "media" %>" id="media" role="tabpanel" aria-labelledby="media-tab">
+        <!-- MEDIA - OWNER & COLLABORATOR -->
+        <% if (@user_type == :owner || @user_type == :collaborator) %>
+          <%= render "shared/media" %>
+        <% end %>
+      </div>
+      <div class="tab-pane fade" id="chat" role="tabpanel" aria-labelledby="chat-tab">
+        <%= render "shared/project_chat" %>
+      </div>
+

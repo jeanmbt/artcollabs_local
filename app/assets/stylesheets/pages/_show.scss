@@ -1,9 +1,9 @@
 .show-container {
-  margin: 64px auto 48px auto;
+  margin: 40px auto 48px auto;
   width: 80vw;
   h1 {
-    margin: 24px 12px 40px 12px;
-    font-size: 40pt;
+    margin: 0 12px 32px 12px;
+    font-size: 2.6vw;
     color: black;
   }
   h2 {
@@ -14,6 +14,23 @@
   }
   h2.inactive-tab {
     color: $grey-med;
+  }
+  #project-title {
+    text-align: center;
+  }
+}
+
+.tab .active {
+  color: black;
+}
+
+.project-photo {
+  width: 100%;
+  height: 260px;
+  img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
   }
 }
 
@@ -29,6 +46,7 @@
 }
 
 .content-left {
+  width: 80%;
 }
 
 .content-right {
@@ -38,15 +56,94 @@
 }
 
 .project-description {
+  white-space: pre-line;
   width: 75%;
   margin: 0 0 40px 12px;
   font-size: 10pt;
+
 }
 
 .project-links {
-  width: 75%;
+  width: 79%;
   border-top: 2px solid $grey-light-med;
   h4 {
     margin: 12px;
   }
 }
+
+.request-container {
+  display: flex;
+  padding: 16px;
+}
+
+.modal-request {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 10pt;
+  .btn-modal {
+    padding: 5px;
+    margin: 6px;
+    width: 120px;
+    font-size: 10pt;
+  }
+  textarea:focus, input:focus {
+    outline: none;
+  }
+}
+
+.timeline-container {
+  margin-top: 80px;
+  margin-bottom: 40px;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+}
+
+.milestone-container {
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  h6.complete {
+    color: $warm-yellow;
+    font-family: "futurateebold", Futura, Helvetica, sans-serif;
+  }
+  h6.incomplete {
+    color: $grey-med;
+    font-family: "futurateebold", Futura, Helvetica, sans-serif;
+  }
+}
+
+.milestone-description {
+  width: 60%;
+}
+
+.milestone-item {
+  display: flex;
+  justify-content: space-between;
+  width: 70vw;
+  padding: 16px;
+  .number {
+    font-family: "futurateebold", Futura, Helvetica, sans-serif;
+    color: $grey-med;
+  }
+  .complete {
+    color: $warm-yellow !important;
+  }
+}
+
+.line-container {
+  width: 80px;
+  flex-grow: 1;
+}
+
+.line-complete {
+  width: 100%;
+  height: 4px;
+  background-color: $warm-yellow;
+}
+
+.line-incomplete {
+  width: 100%;
+  height: 4px;
+  background-color: $grey-light-med;
+}
+

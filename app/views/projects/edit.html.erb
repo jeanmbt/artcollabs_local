@@ -1,3 +1,28 @@
-<h1>Projects#edit</h1>
-<p>Find me in app/views/projects/edit.html.erb</p>
-<%= render "shared/projects_form" %>
+<div class="form-container">
+
+  <h2>Edit project</h2>
+  <br>
+
+  <%= simple_form_for @project do |f| %>
+  <%= f.input :title, input_html: { class: "artcollabs-input", maxlength: 56 } %>
+  <%= f.input :description, input_html: { class: "artcollabs-input bio", maxlength: 10000 } %>
+  <%= f.input :tag_list, label: "Tags", input_html: { class: "artcollabs-input" } %>
+  <%= f.input :budget, collection: Project::STATUS, input_html: { class: "artcollabs-input" } %>
+  <%= f.input :max_members, input_html: { class: "artcollabs-input", maxlength: 15 } %>
+  <%= f.input :end_date, input_html: { class: "artcollabs-input" } %>
+  <%= f.input :photo %>
+  <div class="float-right">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+  <div class="delete-account">
+    <h3>Delete project</h3>
+    <p><em>We do not store your data.</em> Once you have deleted your project, it cannot be retrieved again. Please think about this decision carefully before you confirm.</p>
+    <div style="margin-top: 32px; text-align: center">
+      <%= link_to "Delete project", project_path(@project), method: :delete, class: "white btn-artcollabs btn-warm-red", data: { confirm: "Delete project '#{@project.title}'?" } %>
+    </div>
+  </div>
+
+</div>

@@ -1,11 +1,9 @@
-  <div class="tab-container">
-    <h2>About</h2>
-    <h2><a href="#" class="tab">Timeline</a></h2>
-    <h2><a href="#" class="tab">Media</a></h2>
 
-    <% if  @project.project_chat.present? %>
-      <h2><%= link_to "Chat", project_chat_path(@project.project_chat), class: "tab" %></h2>
-    <% end %>
-  </div>
+<h2>About</h2>
+<h2><a href="#" class="tab">Timeline</a></h2>
+<h2><a href="#" class="tab">Media</a></h2>
 
-  <hr>
+<% if  @project.project_chat.present? %>
+  <h2><%= link_to "Chat", project_chat_path(@project.project_chat), class: "tab" %></h2>
+<% end %>
+

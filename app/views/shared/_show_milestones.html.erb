@@ -1,0 +1,86 @@
+<div class="tab-show-container container">
+
+  <% @counter = 1 %>
+
+  <div class="timeline-container">
+    <% @milestones.sort.each_with_index do |milestone, index| %>
+
+      <div class="milestone-container">
+        <div id="dot-<%= @counter %>">
+          <% if milestone.completed == true %>
+            <%= render "shared/milestone_complete" %>
+            <br>
+            <h6 class="complete"><%= @counter %></h6>
+          <% else %>
+            <%= render "shared/milestone_incomplete" %>
+            <br>
+            <h6 class="incomplete"><%= @counter %></h6>
+          <% end %>
+        </div>
+      </div>
+
+      <% @counter += 1 %>
+
+      <% if index < @milestones.length - 1 %>
+        <div class="line-container">
+          <div style="height: 14px;"></div>
+            <% if @milestones.sort[index + 1].completed == true %>
+              <div class="line-complete"></div>
+            <% else %>
+              <div class="line-incomplete"></div>
+            <% end %>
+        </div>
+      <% end %>
+
+    <% end %>
+  </div>
+
+  <br><br><br>
+
+    <div class="tab-button-container">
+      <button type="button" class="white btn-artcollabs btn-warm-red btn-apply btn-margin-right" data-toggle="modal" data-target="#milestoneModal">
+        New Milestone
+      </button>
+    </div>
+
+  <br><br><br>
+
+  <% @counter = 1 %>
+
+  <% @milestones.sort.each_with_index do |milestone, index| %>
+    <div class="milestone-item" id="milestone-<%= milestone.id %>">
+
+      <div class="milestone-description">
+        <h6 class="number <%= 'complete' if milestone.completed == true %>"><%= @counter %> <%= milestone.title %> (<%= milestone.id %>)</h6>
+        <p><%= milestone.description %></p>
+      </div>
+
+      <div>
+        <% if (@milestones.sort[index - 1].completed == true) && (milestone.completed == false) %>
+          <%= link_to "Mark completed", project_status_milestone_path(@project, milestone), class: "btn-artcollabs btn-warm-red-outline", method: :patch, data: { confirm: "Are you sure?" }  %>
+        <% end %>
+      </div>
+    </div>
+
+    <% @counter += 1 %>
+
+    <%#= link_to "mark as completed", status_milestone_path(milestone) %>
+    <%#= button_to "Delete milestone", project_milestone_path(@project, milestone), method: :delete, data: { confirm: "delete milestone named: '#{@milestone.title}' ?" } %>
+  <% end %>
+</div>
+
+<div class="modal fade" id="milestoneModal" tabindex="-1" role="dialog" aria-labelledby="milestoneModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="milestoneModalLabel">Create new Milestone for <%= @project.title %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render "shared/milestones_form"%>
+      </div>
+    </div>
+  </div>
+</div>

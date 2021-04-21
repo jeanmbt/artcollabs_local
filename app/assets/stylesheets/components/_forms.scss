@@ -1,16 +1,30 @@
 input[type=submit] {
-  font-family: "futurateeregular", Futura, Helvetica, sans-serif;
-  font-size: 12pt;
+  font-family: "futurateemedregular", Futura, Helvetica, sans-serif;
+  font-size: 14pt;
   color: white;
   background-color: $warm-red;
   padding: 8px;
   width: 220px;
   border-radius: 50px;
   border: 0;
+  transition: background 1.5s;
+}
+
+textarea:focus, input:focus {
+  outline: none !important;
+}
+
+input[type=submit]:focus {
+  outline: none;
+}
+
+input[type=submit]:hover {
+  color: white;
+  background-color: $warm-yellow;
 }
 
 .form-container {
-  margin: 100px auto 0 auto;
+  margin: 100px auto 120px auto;
   width: 40vw;
 }
 
@@ -18,7 +32,25 @@ input[type=submit] {
   float: right;
 }
 
+.float-center {
+  float: center;
+}
+
 .new-project-container {
   margin: 60px auto 160px auto;
   width: 50vw;
+}
+
+.delete-account {
+  margin-top: 180px;
+  margin-bottom: 120px;
+}
+
+.form-avatar {
+  margin: 0;
+  width: 25vw;
+  padding: 0;
+  img {
+    width: 100%;
+  }
 }

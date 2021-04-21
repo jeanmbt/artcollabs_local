@@ -1,29 +1,57 @@
+<div class="results text-center" style="margin-top: 16px">
+  <% if ["noresults"].include? params[:search] %>
+    <h2>Sorry, no results for <%= params[:searched] %></h2>
+    <p>What about those:</p>
+  <% end %>
+  <% if params[:query] %>
+    <h2>Results for <%= params[:query] %></h2>
+  <% end %>
+</div>
 <div class="index-card-container">
 
   <% @projects.each do |project| %>
 
     <div class="index-card">
-      <div class="card-image">
-        <%= image_tag project.photo %>
-      </div>
-      <div class="card-title">
-        <h6><%= link_to "#{project.title}", project_path(project) %></h6>
-      </div>
-      <div class="card-roles">
-        <i class="fas fa-user-circle user-icon icon-black"></i><i class="fas fa-user-circle user-icon icon-grey"></i> 3 more people can join
-      </div>
-      <div class="card-tags">
-        <span>photography</span>
-        <span>icon</span>
-        <span>fierce</span>
-        <span>monochrome</span>
-      </div>
-      <div class="card-footer">
-        <%= image_tag "avatar.jpg" %>
-        <h6><a href="#"><%= project.user.username %></a></h6>
+      <%= link_to project_path(project) do %>
+        <div class="card-image">
+          <% if project.photo.attached? %>
+            <%= image_tag project.photo %>
+          <% else %>
+            <%= image_tag "clouds.jpg" %>
+          <% end %>
+        </div>
+        <div class="card-title">
+          <h6><%= project.title %></h6>
+        </div>
+        <div class="card-roles">
+          <i class="fas fa-user-circle user-icon icon-black"></i><i class="fas fa-user-circle user-icon icon-grey"></i> 3 more people can join
+        </div>
+      <% end %>
+        <div class="card-tags">
+          <% if project.tag_list %>
+            <% project.tag_list.each do |tag| %>
+              <div class="a-tag"><%= link_to tag, tagged_path(tag: tag) %></div>
+            <% end %>
+          <% end %>
+        </div>
+      <div class="card-footer user-avatar">
+        <%= link_to profile_path(project.user), class: "a-footer" do %>
+          <% if project.user.avatar.attached? %>
+            <%= image_tag project.user.avatar %>
+          <% else %>
+            <div class="avatar-member">
+              <%= render "shared/avatar" %>
+            </div>
+          <% end %>
+          <h6><%= project.user.username %></h6>
+        <% end %>
       </div>
     </div>
 
   <% end %>
 
+</div>
+
+<div class="pagination text-center" style="margin-top: 10px" >
+  <%= paginate @projects %>
 </div>

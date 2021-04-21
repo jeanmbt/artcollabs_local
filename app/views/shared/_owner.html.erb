@@ -1,0 +1,26 @@
+      <div class="member-card">
+        <div class="member-card-title">
+          <h4>Project creator</h4>
+        </div>
+        <div class="owner-card-info">
+          <div class="owner user-avatar">
+            <%= link_to profile_path(@project.user.id), class: "an-owner" do %>
+              <% if @project.user.avatar.attached? %>
+                <%= image_tag @project.user.avatar %>
+              <% else %>
+                <div class="avatar-owner">
+                  <%= render "shared/avatar" %>
+                </div>
+              <% end %>
+              <h6><%= @project.user.username %></h6>
+            <% end %>
+          </div>
+          <div class="owner-details">
+            <ul>
+              <li>Account created <%= time_ago_in_words(@project.user.created_at) %> ago</li>
+              <li>Current projects: <%= @project.user.projects.count %></li>
+              <li>Finished projects: 2<%#= @project.user.projects.find_by(status: 'finished').count ??? %></li>
+            </ul>
+          </div>
+        </div>
+      </div>

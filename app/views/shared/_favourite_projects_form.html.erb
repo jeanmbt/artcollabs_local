@@ -1,4 +1,5 @@
-<%= simple_form_for [@project, @favourite_project] do |f| %>
-  <%= f.hidden_field :user, value: @user.id %>
-  <button class="white-text btn-artcollabs btn-warm-red">Add to favorites</button>
+<% if favorite_project = FavouriteProject.find_by(user: current_user, project: @project) %>
+  <%= link_to "Delete from favorites", project_favourite_project_path(@project, favorite_project), method: :delete, class: "btn-artcollabs btn-warm-red-outline" %>
+<% else %>
+  <%= link_to "Add to favorites", project_favourite_projects_path(@project), method: :post, class: "white-text btn-artcollabs btn-warm-red" %>
 <% end %>

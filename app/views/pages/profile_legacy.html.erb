@@ -1,0 +1,72 @@
+<div class="profile-container">
+  <div class="profile-content">
+
+    <div class="profile-left">
+      <div class="profile-text">
+        <h1><%= @user.first_name %> <%= @user.last_name %></h1>
+        <h4><%= @user.username %></h4>
+      </div>
+
+      <div class="profile-text">
+        <%= @user.bio %>
+      </div>
+
+      <div class="profile-text">
+        <% if @user.interest_list.length.positive? %>
+          <h5>Interests</h5>
+          <div class="card-tags">
+          <% if @user.interest_list %>
+            <% @user.interest_list.each do |interest| %>
+              <span class="a-tag"><%= link_to interest, users_path(interest: interest) %></span>
+            <% end %>
+          <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="profile-text">
+        <% if @user.skill_list.length.positive? %>
+          <h5>Skills</h5>
+          <div class="card-tags">
+          <% if @user.skill_list %>
+            <% @user.skill_list.each do |skill| %>
+              <span class="a-tag"><%= link_to skill, users_path(skill: skill) %></span>
+            <% end %>
+          <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="profile-right">
+      <div class="profile-pic user-avatar">
+          <% if @user.avatar.attached? %>
+            <%= image_tag @user.avatar %>
+          <% else %>
+            <%= render "shared/avatar" %>
+          <% end %>
+      </div>
+
+      <div class="profile-card">
+        <h5>Links/social media</h5>
+        <ul>
+          <% if @user.links.present? %>
+            <% @user.links.each do |link|  %>
+              <li><%= link_to link.title, link.url %><%= link_to "Delete", link_path(link), method: :delete, data: { confirm: "delete the link?" } %></li>
+            <% end %>
+          <% end %>
+        </ul>
+        <%= link_to "Add a Link", new_link_path %>
+      </div>
+
+      <div class="profile-card">
+        <h5>Media uploads</h5>
+        <br><br>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+

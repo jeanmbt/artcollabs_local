@@ -1,0 +1,13 @@
+.tab-button-container {
+  justify-content: right !important;
+  text-align: right !important;
+  margin-top: 50px;
+  .choose-button, .upload-button {
+    display: inline;
+  }
+}
+
+.tab-show-container {
+  margin: 40px auto 48px auto;
+  width: 80vw;
+}

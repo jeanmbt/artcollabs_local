@@ -25,7 +25,11 @@ require("channels")
 
 // Delete will work on Edge
 
+//= require jquery
 //= require jquery_ujs
+//= require rails-ujs
+//= require bootstrap
+//= require_tree
 
 // External imports
 import "bootstrap";
@@ -42,4 +46,97 @@ document.addEventListener('turbolinks:load', () => {
   initChatroomCable();
   initSendMessage();
 });
+
+// SHOW PAGE TABS
+
+$('#ProjectsTab #about-tab').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show active')
+  $('#ProjectsTab li:first-child a').tab('show') // Select first tab
+})
+
+$('#ProjectsTab #timeline-tab').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show active')
+  $('#myTab li:nth-child(2) a').tab('show') // Select second tab
+})
+
+$('#ProjectsTab #media-tab').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show active')
+  $('#ProjectsTab li:nth-child(3) a').tab('show') // Select third tab
+})
+
+$('#ProjectsTab #chat-tab').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show active')
+  $('#ProjectsTab li:last-child a').tab('show') // Select last tab
+})
+
+// DASHBOARD TABS
+
+$('#DashboardTab #my-projects-tab').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show active')
+  $('#DashboardTab li:first-child a').tab('show')
+})
+
+$('#DashboardTab #my-collabs-tab').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show active')
+  $('#DashboardTab li:nth-child(2) a').tab('show')
+})
+
+$('#DashboardTab #requests-tab').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show active')
+  $('#DashboardTab li:nth-child(3) a').tab('show')
+})
+
+$('#DashboardTab #favorites-tab').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show active')
+  $('#DashboardTab li:last-child a').tab('show')
+})
+
+// TOGGLE
+
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  e.target // newly activated tab
+  e.relatedTarget // previous active tab
+})
+
+// CLICK ON PROJECT'S PHOTO TO ENLARGE
+
+const projectPhoto = document.querySelector('.project-photo');
+
+// projectPhoto.addEventListener("click", (event) => {
+//   arrow.classList.toggle("arrow-active")
+//   projectPhoto.classList.toggle("project-photo-active");
+// })
+
+//  better Alerts
+
+const alert = document.querySelector('#alert-flash')
+
+setTimeout(fade_out, 8000);
+
+function fade_out() {
+  $(".alert").fadeOut().empty();
+}
+
+// Scrolling for timeline
+function scroll_to(position) {
+  const element_to_scroll_to = document.getElementById(position);
+  element_to_scroll_to.scrollIntoView();
+}
+
+function add_links(amount) {
+  console.log(amount);
+  // const dot_button = document.getElementById('dot-5');
+  // dot_button.addEventListener('click', function(event) {
+  //   const element = '5';
+  //   element.scrollIntoView();
+  // })
+}
 

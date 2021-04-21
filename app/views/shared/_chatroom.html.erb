@@ -1,0 +1,27 @@
+      <%= form_for [ @project_chat, @message ], remote: true do |f| %>
+        <div class="chat-message-container">
+
+          <%= f.text_field :content,
+            label: false, placeholder: "Message to the Collabs of #{@project.title}",
+            input_html: { :id => "input_message", class: "chat-message-text" } %>
+
+          <button><div class="icon-bg"><i class="fas fa-paper-plane chat-send-icon"></i></div></button>
+
+        </div>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <% end %>
+
+      <div id="messages" class="overflow-auto" data-projectchat-id="<%= @project_chat.id %>">
+        <% @project_chat.messages.each do |message| %>
+          <div class="message-container" id="message-<%= message.id %>">
+            <div class="message-top">
+              <span class="chat-user"><%= message.user.username %></span>
+              <span class="chat-date"><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></span>
+            </div>
+            <div class="author">
+              <%= image_tag message.user.avatar %>
+              <p><%= message.content %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>

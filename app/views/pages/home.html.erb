@@ -1,9 +1,13 @@
 
-<h1>Art Collabs is about making things happen!</h1>
+<h1>Ready to make things happen?</h1>
 
+<div class="home-sub">
+  <h6>We are here to help you find your next creative team. Whether you want to realize your own vision or join an ongoing project, this is the place to start!</h6>
+</div>
 
 <%= form_tag projects_path, method: :get do %>
 
+<div class="home-search-explore">
   <div class="home-search-container">
 
     <%= text_field_tag :query,
@@ -15,5 +19,20 @@
     <button class="search-submit"><div class="icon-bg"><i class="fas fa-search home-search-icon"></i></div></button>
 
   </div>
+  <%= link_to "Explore", projects_path, class: "btn-home-explore" %>
+</div>
+
+<div class="home-collection">
+  <% @collections.each do |collection| %>
+      
+
+        <div class="collection-card" style='background-image: url("https://source.unsplash.com/featured?<%= collection %>")'>
+          <div class="collection-title" >
+            <%= link_to "#{collection.gsub("-", " ")}", projects_path( query: collection.gsub("-", " "))%>
+          </div>
+        </div>
+
+  <% end %>
+</div>
 
 <% end %>

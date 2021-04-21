@@ -1,0 +1,5 @@
+meta_product_name: "Artcollabs"
+meta_title: "Artcollabs - Let's make things happen."
+meta_description: "We are here to help you find your next art collaboration!"
+meta_image: "cover.png" # should exist in `app/assets/images/`
+#twitter_account: "@product_twitter_account"   # required for Twitter Cards

@@ -1,24 +1,200 @@
+<div class="show-container">
 
-<h1>My projects</h1>
-<% @projects.each do |project| %>
-  <br><%= link_to "#{project.title}", project_path(project) %>
-<% end %>
+  <h1>Dashboard</h1>
 
-<br>--------------------- <br>
-<h1>My collabs</h1>
-<% @collaborations.each do |collaboration| %>
-  <br>as <%= collaboration.role %> on
-  <%= link_to "#{collaboration.project.title}", project_path(collaboration.project) %>
-<% end %>
+    <div class="tab-container-bts">
 
-<br>--------------------- <br>
-<h1>Collaborations to my projects</h1>
-<h2>pending</h2>
-<% @collaborations_to_my_projects.each do |collab| %>
-  <!--PENDING COLLABS-->
-  <% if collab.status == nil %>  
-    <br><%= link_to "#{collab.project.title}", project_path(collab.project) %>
-  <% end %>
-  
-<% end %>
-  
+    <ul class="nav justify-content-between" id="DashboardTab" role="tablist">
+      <li class="nav-item tab">
+        <a class="nav-link tab active" id="my-projects-tab" data-toggle="tab" href="#my-projects" role="tab" aria-controls="my-projects" aria-selected="true"><h2>My projects</h2></a>
+      </li>
+
+      <li class="nav-item tab">
+        <a class="nav-link tab" id="my-collabs-tab" data-toggle="tab" href="#my-collabs" role="tab" aria-controls="my-collabs" aria-selected="false"><h2>My collaborations</h2></a>
+      </li>
+
+      <li class="nav-item tab">
+        <a class="nav-link tab" id="requests-tab" data-toggle="tab" href="#requests" role="tab" aria-controls="requests" aria-selected="false"><h2>Requests</h2></a>
+      </li>
+
+      <li class="nav-item tab">
+        <a class="nav-link tab" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false"><h2>Favorites</h2></a>
+      </li>
+    </ul>
+
+    <hr>
+
+  </div>
+
+  <!-- TAB CONTENTS -->
+  <div class="tab-content" id="DashboardTabContent">
+
+
+    <!-- MY PROJECTS -->
+    <div class="tab-pane show active fade dashboard-list" id="my-projects" role="tabpanel" aria-labelledby="my-projects-tab">
+      <div class="dashboard-grid">
+
+      <% @projects.each do |project| %>
+
+        <div class="index-card">
+          <%= link_to project_path(project) do %>
+            <div class="card-image">
+              <% if project.photo.attached? %>
+                <%= image_tag project.photo %>
+              <% else %>
+                <%= image_tag "clouds.jpg" %>
+              <% end %>
+            </div>
+            <div class="card-title">
+              <h6><%= project.title %></h6>
+            </div>
+            <div class="card-roles">
+              <i class="fas fa-user-circle user-icon icon-black"></i><i class="fas fa-user-circle user-icon icon-grey"></i> 3 more people can join
+            </div>
+          <% end %>
+          <div class="card-tags">
+            <% if project.tag_list %>
+              <% project.tag_list.each do |tag| %>
+                <div class="a-tag"><%= link_to tag, tagged_path(tag: tag) %></div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="card-footer user-avatar">
+            <%= link_to profile_path(project.user), class: "a-footer" do %>
+              <% if project.user.avatar.attached? %>
+                <%= image_tag project.user.avatar %>
+              <% else %>
+                <div class="avatar-member">
+                  <%= render "shared/avatar" %>
+                </div>
+              <% end %>
+              <h6><%= project.user.username %></h6>
+            <% end %>
+          </div>
+        </div>
+
+      <% end %>
+
+      </div>
+    </div>
+
+    <!-- MY COLLABS -->
+    <div class="tab-pane fade dashboard-list" id="my-collabs" role="tabpanel" aria-labelledby="my-collabs-tab">
+      <% if @my_collabs_accepted.length.positive? %>
+        <h2>Ongoing projects</h2><br>
+        <% @my_collabs_accepted.each do |collaboration| %>
+          <div class="dashboard-pair">
+            <div class="dashboard-item">
+              <h6><%= collaboration.role %> on<br>
+              <%= link_to "#{collaboration.project.title}", project_path(collaboration.project) %></h6>
+            </div>
+            <div class="dashboard-request float-right">
+              <%= link_to "Edit", edit_project_collaboration_path(collaboration.project, collaboration), class: "white btn-artcollabs btn-warm-red btn-margin-right btn-dashboard" %>
+              <%= link_to "Delete", project_collaboration_path(collaboration.project, collaboration), class: "btn-artcollabs btn-warm-red-outline btn-dashboard", method: :delete, data: { confirm: "Delete request? Are you sure?" } %>
+            </div>
+          </div>
+        <% end %>
+        <hr><br>
+      <% end %>
+      <% if @my_collabs_pending.length.positive? %>
+        <h2>Sent requests</h2><br>
+        <% @my_collabs_pending.each do |collaboration| %>
+          <div class="dashboard-pair">
+            <div class="dashboard-item">
+              <h6><%= collaboration.role %> on<br>
+              <%= link_to "#{collaboration.project.title}", project_path(collaboration.project) %></h6>
+            </div>
+            <div class="dashboard-request float-right">
+              <%= link_to "Edit", edit_project_collaboration_path(collaboration.project, collaboration), class: "white btn-artcollabs btn-warm-red btn-margin-right btn-dashboard" %>
+              <%= link_to "Delete", project_collaboration_path(collaboration.project, collaboration), class: "btn-artcollabs btn-warm-red-outline btn-dashboard", method: :delete, data: { confirm: "Delete request? Are you sure?" } %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <!-- REQUESTS -->
+    <div class="tab-pane fade dashboard-list" id="requests" role="tabpanel" aria-labelledby="requests-tab">
+      <% @pending_collabs.each do |collaboration| %>
+        <div class="user-avatar request-user">
+              <%= link_to profile_path(collaboration.user), class: "r-member" do %>
+                <% if collaboration.user.avatar.attached? %>
+                  <%= image_tag collaboration.user.avatar %>
+                <% else %>
+                  <div class="avatar-member">
+                    <%= render "shared/avatar" %>
+                  </div>
+                <% end %>
+                <h3><%= collaboration.user.username %></h3>
+              <% end %>
+        </div>
+        <div class="dashboard-pair">
+          <div class="dashboard-item">
+            <h6>wants to collaborate as <%= collaboration.role  %> on<br>
+            <%= link_to "#{collaboration.project.title}", project_path(collaboration.project) %></h6>
+            <div class="dashboard-message">
+              <strong>Message:</strong> <%= collaboration.message %>
+            </div>
+          </div>
+          <div class="dashboard-request float-right">
+            <%= link_to  "Confirm", confirm_path(collaboration), class: "white btn-artcollabs btn-warm-red btn-margin-right btn-dashboard", method: :patch, data: { confirm: "Are you sure?" }  %>
+            <%= link_to  "  Deny  ", confirm_path(collaboration), class: "btn-artcollabs btn-warm-red-outline btn-dashboard", method: :patch, data: { confirm: "Are you sure?" } %>
+          </div>
+        </div>
+        <hr><br>
+      <% end %>
+    </div>
+
+    <!-- FAVORITES -->
+    <div class="tab-pane fade dashboard-list" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
+      <div class="dashboard-grid">
+
+      <% @project_faves.each do |project| %>
+
+        <div class="index-card">
+          <%= link_to project_path(project) do %>
+            <div class="card-image">
+              <% if project.photo.attached? %>
+                <%= image_tag project.photo %>
+              <% else %>
+                <%= image_tag "clouds.jpg" %>
+              <% end %>
+            </div>
+            <div class="card-title">
+              <h6><%= project.title %></h6>
+            </div>
+            <div class="card-roles">
+              <i class="fas fa-user-circle user-icon icon-black"></i><i class="fas fa-user-circle user-icon icon-grey"></i> 3 more people can join
+            </div>
+          <% end %>
+          <div class="card-tags">
+            <% if project.tag_list %>
+              <% project.tag_list.each do |tag| %>
+                <div class="a-tag"><%= link_to tag, tagged_path(tag: tag) %></div>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="card-footer user-avatar">
+            <%= link_to profile_path(project.user), class: "a-footer" do %>
+              <% if project.user.avatar.attached? %>
+                <%= image_tag project.user.avatar %>
+              <% else %>
+                <div class="avatar-member">
+                  <%= render "shared/avatar" %>
+                </div>
+              <% end %>
+              <h6><%= project.user.username %></h6>
+            <% end %>
+          </div>
+        </div>
+
+      <% end %>
+
+      </div>
+      <div style="height: 40px;"></div>
+    </div>
+
+  </div>
+
+</div>
+

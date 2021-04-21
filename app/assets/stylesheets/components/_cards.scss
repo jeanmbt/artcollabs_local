@@ -5,13 +5,13 @@
   column-gap: 16px;
   row-gap: 56px;
   justify-items: center;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 .index-card {
   margin: 0;
   width: 240px;
-  height: 346px;
+  height: 366px;
   border: 2px solid $grey-light-med;
   border-radius: 20px;
 }
@@ -19,15 +19,63 @@
 .card-image {
   width: 100%;
   height: 140px;
+
+  // suggestion - moving pics
+  text-align: center;
+  vertical-align: middle;
+  overflow: hidden;
+  display: inline-block;
+  z-index: 1;
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
     border-top-left-radius: 17px;
     border-top-right-radius: 17px;
+
+    // suggestion - moving pics
+    &:hover {
+      animation-name: zoom-in-pic;
+      animation-duration: 20s;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+
+    }
   }
 }
 
+@keyframes zoom-in-pic {
+  0% {
+    object-position: 100% 0%;
+  }
+  15% {
+    object-position: 100% 100%;
+  }
+  35% {
+    object-fit: none;
+    object-position: 0% 20%;
+  }
+  60% {
+    object-position: 80% 20%;
+  }
+  68% {
+
+    object-position: 50% 50%;
+  }
+  70% {
+    object-fit: cover;
+  }
+  85% {
+    object-position: 50% 100%;
+  }
+  100% {
+    object-fit: none;
+  }
+
+}
+
 .card-title {
+  height: 34px;
   margin: 16px;
 }
 
@@ -38,11 +86,16 @@
 }
 
 .card-tags {
+  height: 50px;
+  width: 220px;
   margin: 6px 6px 12px 6px;
-  line-height: 24px;
-  span {
-    margin: 6px;
-    padding: 4px 16px 4px 16px;
+  display:flex;
+  flex-wrap: wrap;
+  .a-tag {
+    height: 20px;
+    margin: 2px;
+    line-height: 16px;
+    padding: 2px 16px 2px 16px;
     font-size: 8pt;
     background-color: $grey-light;
     border-radius: 40px;
@@ -55,13 +108,19 @@
   align-items: center;
   background-color: rgba(0, 0, 0, 0);
   border-top: 1px solid $grey-light;
+  h6 {
+    margin: 0 0 2px 12px;
+  }
+}
+
+.a-footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   img {
     width: 32px;
     height: 32px;
     border-radius: 50px;
-  }
-  h6 {
-    margin: 0 0 2px 12px;
   }
 }
 
@@ -83,6 +142,9 @@
   width: 240px;
   border: 2px solid $grey-light-med;
   border-radius: 20px;
+  h4 {
+    margin: 4px;
+  }
 }
 
 .member-card-title {
@@ -103,11 +165,63 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+}
+
+.a-member {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  h6 {
+    margin: 8px;
+  }
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+  }
+}
+
+.owner-card-info {
+  padding: 8px 16px 8px 16px;
+  img {
+    width: 64px;
+    height: 64px;
+    border-radius: 100px;
+    margin-right: 8px;
+  }
+}
+
+.owner {
+  margin: 8px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.an-owner {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   h6 {
     margin: 8px;
   }
 }
 
+.owner-details {
+  ul {
+    padding-left: 2px;
+    list-style-type: none;
+  }
+  li {
+    padding-top: 8px;
+  }
+}
+
+@media(max-width: 1300px) {
+  .index-card-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 @media(max-width: 800px) {
   .index-card-container {
     grid-template-columns: 1fr 1fr;

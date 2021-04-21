@@ -1,0 +1,72 @@
+.dashboard-grid {
+  width: 100%;
+  display: grid;
+  column-gap: 16px;
+  row-gap: 56px;
+  justify-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.dashboard-list {
+  margin: 60px 40px 100px 40px;
+}
+
+.dashboard-pair {
+  display: flex;
+  margin-left: 24px;
+  margin-bottom: 40px;
+}
+
+.dashboard-item {
+  width: 40%;
+}
+
+.dashboard-request {
+  width: 60%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.dashboard-message {
+  margin-top: 16px;
+}
+
+.user-bold {
+  font-family: "futurateebold", Futura, Helvetica, sans-serif;
+  font-size: 14pt;
+}
+
+.request-user {
+  margin: 8px;
+}
+
+.r-member {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  h3, h4, h6 {
+    margin: 10px;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+  }
+}
+
+@media(max-width: 1300px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+@media(max-width: 800px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media(max-width: 500px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}

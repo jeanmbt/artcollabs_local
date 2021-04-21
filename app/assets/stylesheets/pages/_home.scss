@@ -1,21 +1,32 @@
 h1 {
   color: $dark-blue;
-  font-size: 64pt;
-  margin: 80px 160px 80px 160px;
+  font-size: 8vw;
+  line-height: 10vw;
+  margin: 80px 160px 60px 160px;
 }
 
 input[type="text"]:focus {
     outline : none;
 }
 
-.home-search-container {
+::placeholder {
+  color: $grey-med;
+  opacity: 1;
+}
+
+.home-search-explore {
+  width: 60vw;
   margin: 0 auto;
+  display: flex;
+}
+
+.home-search-container {
   padding: 0 0 0 14px;
   background-color: white;
   border-radius: 50px;
   border: 2pt solid $dark-blue;
   height: 48px;
-  width: 500px;
+  width: 50vw;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,3 +54,42 @@ input[type="text"]:focus {
   font-size: 16pt;
   color: white;
 }
+
+.home-sub {
+  margin: 0 auto 5vw auto;
+  width: 50vw;
+  h6 {
+    font-size: 1.5vw;
+    color: $grey-dark;
+    line-height: 2vw;
+  }
+}
+
+.home-collection {
+  width: 80vw;
+  margin: 80px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.collection-card {
+  border-radius: 20px;
+  width: 10rem;
+  height: 360px;
+  background: $light-blue;
+  background-position: center center;
+  background-size: cover;
+  font-family: "futurateemed", Futura, Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 16pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    a {
+      color: $warm-red !important;
+      &:hover {
+        color: white !important;
+      }
+    }
+}
+

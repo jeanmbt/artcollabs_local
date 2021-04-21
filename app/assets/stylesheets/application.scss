@@ -7,34 +7,37 @@
 @import "bootstrap/scss/bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+@import "config/flexbin";
+
 
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "components/tab_contents";
 
 // FONTS
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&display=swap');
-@font-face {
-    font-family: 'futurateeregular';
-    src: url('font/fe11003t-webfont.woff2') format('woff2'),
-         url('font/fe11003t-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'futurateemedregular';
-    src: url('../font/fe11004t-webfont.woff2') format('woff2'),
-         url('../font/fe11004t-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'futurateebold';
-    src: url('font/futuratee-bold-webfont.woff2') format('woff2'),
-         url('font/futuratee-bold-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+// @font-face {
+//     font-family: 'futurateeregular';
+//     src: url('../fonts/fe11003t-webfont.woff2') format('woff2');
+//          /* url('fonts/fe11003t-webfont.woff') format('woff'); */
+//     font-weight: normal;
+//     font-style: normal;
+// }
+// @font-face {
+//     font-family: 'futurateemedregular';
+//     src: url('../fonts/fe11004t-webfont.woff2') format('woff2');
+//          /* asset-url('../fonts/fe11004t-webfont.woff') format('woff'); */
+//     font-weight: normal;
+//     font-style: normal;
+// }
+// @font-face {
+//     font-family: 'futurateebold';
+//     src: url('../fonts/futuratee-bold-webfont.woff2') format('woff2');
+//          /* asset-url('fonts/futuratee-bold-webfont.woff') format('woff'); */
+//     font-weight: normal;
+//     font-style: normal;
+// }
 
 // Global styles
 body {
@@ -46,7 +49,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'futurateebold', Futura, Helvetica, sans-serif;
+  font-family: 'futurateemedregular', Futura, Helvetica, sans-serif;
 }
 
 h2 {
@@ -62,11 +65,11 @@ h4 {
 }
 
 h5 {
-  font-size: 12pt;
+  font-size: 14pt;
 }
 
 h6 {
-  font-size: 10pt;
+  font-size: 12pt;
 }
 
 hr {
@@ -84,8 +87,11 @@ a.white, a.btn-white:visited, a.white:active, a.btn-white:hover{
   color: white;
 }
 
-.main-body-container {
-  min-height: 95vh;
+textarea:focus, input:focus {
+  outline: none;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 input:-webkit-autofill,
@@ -97,4 +103,48 @@ input:-webkit-autofill:active  {
 
 input:-webkit-autofill {
     -webkit-text-fill-color: black !important;
+}
+
+.main-body-container {
+  min-height: 95vh;
+}
+
+.artcollabs-input {
+  border-radius: 20px;
+  border: 2px solid $grey-light-med;
+  resize: none;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 10pt;
+}
+
+.artcollabs-input:focus {
+  outline: none !important;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.bio {
+  height: 160px !important;
+}
+
+.bio:focus {
+  outline: none !important;
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.user-avatar {
+  img {
+    object-fit: cover;
+  }
+}
+
+.modal-content {
+  border-radius: 0;
+  border: 0;
+  textarea:focus, input:focus {
+    outline: none;
+  }
 }

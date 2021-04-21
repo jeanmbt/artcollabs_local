@@ -1,29 +1,18 @@
-<div class="show-container">
+      <div class="chat-form">
+        <%= simple_form_for [ @project_chat, @message ], remote: true do |f| %>
+          <%= f.input :content,
+              label: false,
+              placeholder: "Message",
+              :input_html => { id: "input_message", class: "artcollabs-input chat-message" } %>
+          <div class="form-actions float-right">
+            <%= f.button :submit %>
+          </div>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <% end %>
+      </div>
 
-  <h1><%= @project.title %></h1>
-
-  <%= render "shared/chat" %>
-
-</div>
-
-<div class="show-container">
-    <div id="messages" data-projectchat-id="<%= @project_chat.id %>">
-      <% @project_chat.messages.each do |message| %>
-        <div class="message-container" id="message-<%= message.id %>">
-          <span><%= message.user.email %></span>
-          <small><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-          <i class="author">
-            <%= image_tag "avatar.jpg" %>
-            <p><%= message.content %></p>
-          </i>
-        </div>
-      <% end %>
-    </div>
-
-    <%= simple_form_for [ @project_chat, @message ], remote: true do |f| %>
-      <%= f.input :content, label: false, placeholder: "Message ##{@project.title}", :input_html => {
-        :id => "input_message" }, class: "home-search-text" %>
-      <%= f.submit class: "btn-chats btn-warm-red submit-button" %>
-      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <% end %>
-</div>
+      <div id="messages" class="overflow-auto" data-projectchat-id="<%= @project_chat.id %>">
+        <% @project_chat.messages.reverse.each do |message| %>
+          <%= render "messages/message", message: message  %>
+        <% end %>
+      </div>

@@ -1,20 +1,18 @@
+<div class="project-photo" id="project-pic">
+
+  <% if @project.photo.attached? %>
+    <%= image_tag @project.photo %>
+  <% else %>
+    <%= image_tag "clouds.jpg" %>
+  <% end %>
+  
+</div>
+
 <div class="show-container">
 
   <h1><%= @project.title %></h1>
 
-  <% if @user_type == :creator %>
-
-    <%= render "shared/about_owner" %>
-
-  <% elsif @user_type == :collaborator  %>
-
-    <%= render "shared/about_collaborator" %>
-
-  <% else %>
-
-    <%= render "shared/about_user" %>
-
-  <% end %>
+  <%= render "shared/tabs" %>
 
 </div>
 

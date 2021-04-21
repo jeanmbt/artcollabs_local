@@ -1,11 +1,86 @@
-  <%= render "shared/about" %>
+  <div class="show-content">
+
+    <div class="content-left">
+
+      <div class="project-description">
+        <%= @project.description %>
+      </div>
+
+      <div class="project-links">
+        <h4>Resources</h4>
+      </div>
+
+    </div>
+
+    <div class="content-right">
+      <%= link_to "Edit content", edit_project_path(@project), class: "white btn-artcollabs btn-warm-red" %>
+
+      <% if @pending_collabs.length == 0 %>
+        <button type="button" class="white btn-artcollabs btn-disabled btn-apply" disabled>
+          Pending requests
+        </button>
+      <% else %>
+        <button type="button" class="white btn-artcollabs btn-warm-red btn-apply" data-toggle="modal" data-target="#requestModal">
+          Pending requests
+        </button>
+      <% end %>
+
+      <%= render "shared/members" %>
+
+    </div>
+
+  <div style="height: 60px"></div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="requestModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="requestModalLabel">Requests for <%= @project.title %></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <br>
+              <% @pending_collabs.each do |collaboration| %>
+                <div class="request-container">
+                  <div class="modal-request">
+                    <div class="member user-avatar">
+                      <%= link_to profile_path(collaboration.user), class: "a-member" do %>
+                        <% if collaboration.user.avatar.attached? %>
+                          <%= image_tag collaboration.user.avatar %>
+                        <% else %>
+                          <div class="avatar-member">
+                            <%= render "shared/avatar" %>
+                          </div>
+                        <% end %>
+                        <h6><%= collaboration.user.username %></h6>
+                      <% end %>
+                    </div>
+                    Message: <%= collaboration.message %>
+                  </div>
+                  <div class="modal-request">
+                    <%= button_to  "Confirm", confirm_path(collaboration), method: :patch, data: { confirm: "Are you sure?" }, class: "btn-modal"  %>
+                    <%= button_to  "  Deny  ", confirm_path(collaboration), method: :patch, data: { confirm: "Are you sure?" }, class: "btn-modal" %>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  <!-- legacy
+  <%#= render "shared/about" %>
 
   <div class="show-content">
 
     <div class="content-left">
 
       <div class="project-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+        <%= @project.description %>
       </div>
 
       <div class="project-links">
@@ -17,7 +92,8 @@
 
     <div class="content-right">
 
-      <a href="#" class="white btn-artcollabs btn-warm-red">Edit content</a>
+      <%= link_to "Edit content", edit_project_path(@project.id), class: "white btn-artcollabs btn-warm-red" %>
+
       <a href="#" class="white btn-artcollabs btn-warm-red">Pending requests</a>
       <a href="#" class="white btn-artcollabs btn-warm-red">Delete project</a>
 

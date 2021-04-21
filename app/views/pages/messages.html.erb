@@ -1,0 +1,4 @@
+<h6>My Chats</h6>
+<% @chatrooms.each do |chatroom| %>
+  <br><%= link_to "#{chatroom.id}", chatroom_path(chatroom) %>
+<% end %>

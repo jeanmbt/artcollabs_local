@@ -1,51 +1,75 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="form-container">
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+  <h2>Account settings</h2>
+  <br>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+    <div class="form-inputs">
 
-    <%= f.input :first_name,
-                hint: "we need your current first name to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "first_name" } %>
-    <%= f.input :last_name,
-                hint: "we need your current last name to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "last_name" } %>
-    <%= f.input :bio,
-                hint: "we need your current bio to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "bio" } %>
-    <%= f.input :location,
-                hint: "we need your current location to confirm your changes",
-                required: true,
-              input_html: { autocomplete: "location" } %>      
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <% end %>
+
+      <div class="form-avatar">
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar %>
+        <% else %>
+          <%= render "shared/avatar" %>
+        <% end %>
+      </div>
+
+      <%= f.input :avatar,
+                  hint: "Choose a picture",
+                  required: false %>
+      <%= f.input :username,
+                  required: true,
+                  input_html: { autocomplete: "username", value: current_user.username, class: "artcollabs-input", maxlength: 32 } %>
+      <%= f.input :first_name,
+                  required: true,
+                  input_html: { autocomplete: "first_name", value: current_user.first_name, class: "artcollabs-input", maxlength: 128 } %>
+      <%= f.input :last_name,
+                  required: true,
+                  input_html: { autocomplete: "last_name", value: current_user.last_name, class: "artcollabs-input", maxlength: 128 } %>
+      <%= f.input :bio,
+                  input_html: { autocomplete: "bio", value: current_user.bio, class: "artcollabs-input bio", maxlength: 3000 } %>
+      <%= f.input :location,
+                  input_html: { autocomplete: "location", value: current_user.location, class: "artcollabs-input", maxlength: 64 } %>
+      <%= f.input :email,
+                  required: true,
+                  input_html: { class: "artcollabs-input" } %>
+      <%= f.input :password,
+                  hint: "leave it blank if you don't want to change it",
+                  required: false,
+                  input_html: { autocomplete: "new-password", class: "artcollabs-input" } %>
+      <%= f.input :password_confirmation,
+                  required: false,
+                  input_html: { autocomplete: "new-password", class: "artcollabs-input" } %>
+      <%= f.input :interest_list, label: "My interests",
+                  hint: "separate with commas",
+                  input_html: { autocomplete: "interests", class: "artcollabs-input" } %>
+      <%= f.input :skill_list, label: "My skills",
+                  hint: "separate with commas",
+                  input_html: { autocomplete: "skills", class: "artcollabs-input" } %>
+      <%= f.input :current_password,
+                  hint: "we need your current password to confirm your changes",
+                  required: true,
+                  input_html: { autocomplete: "current-password", class: "artcollabs-input" } %>
+    </div>
+
+    <div class="form-actions float-right">
+      <br>
+      <%= f.button :submit, "Update" %>
+    </div>
+  <% end %>
+
+  <div class="delete-account">
+    <h3>Delete account</h3>
+    <p><em>We do not store your data.</em> Once you have deleted your account, it cannot be retrieved again. Please think about this decision carefully before you confirm.</p>
+    <div style="margin-top: 32px; text-align: center">
+      <%= link_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "white btn-artcollabs btn-warm-red" %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

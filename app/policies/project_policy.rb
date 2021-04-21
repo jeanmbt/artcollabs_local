@@ -7,11 +7,14 @@ class ProjectPolicy < ApplicationPolicy
 
   # ASSING POLICIES FOR PROJECTS SO THAT ONLY TEAM MEMBERS CAN SEE ADDITIONAL INFO
 
-
   def index?
     true
   end
 
+  def tagged?
+    true
+  end
+  
   def show?
     true
   end
@@ -35,4 +38,9 @@ class ProjectPolicy < ApplicationPolicy
   def destroy?
     record.user == user || user.admin?
   end
+
+  def media?
+    true
+  end
+  
 end

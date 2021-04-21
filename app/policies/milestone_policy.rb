@@ -26,4 +26,9 @@ class MilestonePolicy < ApplicationPolicy
   def destroy?
     true
   end
+
+  def status?
+    true
+  end
+  
 end

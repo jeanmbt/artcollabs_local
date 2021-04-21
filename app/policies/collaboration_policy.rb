@@ -25,4 +25,9 @@ class CollaborationPolicy < ApplicationPolicy
   def destroy?
     record.user == user || user.admin?
   end
+
+  def confirm?
+    true
+  end
+
 end

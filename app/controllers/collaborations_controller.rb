@@ -1,12 +1,14 @@
 class CollaborationsController < ApplicationController
-  before_action :set_collaboration, only: %i[ update destroy ]
+  before_action :set_collaboration, only: %i[ update destroy confirm deny ]
   before_action :set_project, only: %i[ create edit destroy ]
   before_action :authenticate_user!
-  
+
   def new
+    @collaboration = Collaboration.new
+    authorize @collaboration
   end
 
-  def create 
+  def create
     @collaboration = Collaboration.new(collaboration_params)
     # @project = Project.find(params[:project_id])
     @collaboration.project = @project
@@ -14,13 +16,15 @@ class CollaborationsController < ApplicationController
     authorize @collaboration
       if @collaboration.save
         redirect_to @project
-        flash[:notice] = "You submitted a request to collaborate for the project #{@project.title}. Now go create something while you wait for approval!"
+        flash[:notice] = "You submitted a request to collaborate for the project #{@project.title}."
       else
-        render :new
+        redirect_to @project
+        flash[:notice] = "You have to enter a message to apply."
       end
   end
 
-  def edit 
+  def edit
+    
     # @project = Project.find(params[:project_id])
     @collaboration = Collaboration.find(params[:id])
     authorize @collaboration
@@ -37,36 +41,39 @@ class CollaborationsController < ApplicationController
   end
 
   def destroy
+    # Gets current page to redirect later
+    session[:return_to] ||= request.referer
     # @project = Project.find(params[:project_id])
     @collaboration.destroy
     authorize @collaboration
-    redirect_to @project
+    redirect_to session.delete(:return_to)
   end
 
   def confirm
-    @collaboration = Collaboration.find(params[:id])
-    if @collaboration.confirmed == true
-      @collaboration.confirmed = false
-      flash[:notice] = "Collaboration was denied"
-    else
-      @collaboration.confirmed = true
-      flash[:notice] = "Collaboration was accepted"
-    end
-    
+    # Gets current page to redirect later
+    session[:return_to] ||= request.referer
+    @collaboration.status = "confirmed"
+    @collaboration.confirmed = true
+    flash[:notice] = "Collaboration was accepted"
     authorize @collaboration
     @collaboration.save
-    
-    # redirect_to project_path(@collaboration.project)
-
-    # ON THE PAGE WHERE THE CONFIRMATION IS GOING TO HAPPEN (got from wignb) >>>
-    # <% if booking.confirmed == nil %> 
-    # <%= link_to  "Confirm", confirm_path(booking), method: :patch, data: { confirm: "Are you sure?" }, class: "btn btn-success text-right" %>
-    # <%= link_to  "  Deny  ", confirm_path(booking), method: :patch, data: { confirm: "Are you sure?" }, class: "btn btn-danger text-right" %>
+    # Redirects to previous page
+    redirect_to session.delete(:return_to)
 
   end
 
+  def deny
+    session[:return_to] ||= request.referer
+    @collaboration.status = "denied"
+    @collaboration.confirmed = false
+    flash[:notice] = "Collaboration was denied"
+    authorize @collaboration
+    @collaboration.save
+    redirect_to session.delete(:return_to)
+  end
+
   private
-  
+
   def set_project
     @project = Project.find(params[:project_id])
   end
@@ -74,8 +81,8 @@ class CollaborationsController < ApplicationController
   def set_collaboration
     @collaboration = Collaboration.find(params[:id])
   end
-  
+
   def collaboration_params
-    params.require(:collaboration).permit(:project_id, :user_id, :status, :role, :message, :created_at, :updated_at)
+    params.require(:collaboration).permit(:project_id, :user_id, :status, :role, :message, :created_at, :updated_at, :confirmed)
   end
 end

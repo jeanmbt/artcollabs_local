@@ -14,3 +14,25 @@ $headers-font: "futurateebold", "Helvetica", "sans-serif";
 //        font-url('FontFile.ttf') format('truetype')
 // }
 // $my-font: "Font Name";
+
+@font-face {
+    font-family: 'futurateeregular';
+    src: font-url('fe11003t-webfont.woff2') format('woff2'),
+         font-url('fonts/fe11003t-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'futurateemedregular';
+    src: font-url('fe11004t-webfont.woff2') format('woff2'),
+         font-url('../fonts/fe11004t-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'futurateebold';
+    src: font-url('futuratee-bold-webfont.woff2') format('woff2'),
+         font-url('fonts/futuratee-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -10,6 +10,10 @@ class ApplicationPolicy
     false
   end
 
+  def tagged?
+    true
+  end
+
   def show?
     false
   end

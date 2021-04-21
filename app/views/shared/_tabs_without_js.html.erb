@@ -1,0 +1,8 @@
+  <div class="tab-container">
+    <h2><%= link_to "About", project_path(@project.id), class: "tab" %></h2>
+    <h2><a href="#" class="tab">Timeline</a></h2>
+    <h2><%= link_to "Media", media_path(@project), class: "tab nav-link" %></h2>
+    <h2><%= link_to "Chat", project_chat_path(@project.project_chat), class: "nav-link tab" %></h2>
+  </div>
+
+ <hr>

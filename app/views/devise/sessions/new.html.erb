@@ -6,14 +6,15 @@
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="form-inputs">
       <%= f.input :email,
-                  required: false,
+                  required: true,
                   autofocus: true,
-                  input_html: { autocomplete: "email" } %>
+                  input_html: { autocomplete: "email", class: "artcollabs-input" } %>
       <%= f.input :password,
-                  required: false,
-                  input_html: { autocomplete: "current-password" } %>
+                  required: true,
+                  input_html: { autocomplete: "current-password", class: "artcollabs-input" } %>
       <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
       <%= render "devise/shared/links" %>
+      <%= link_to "Log in with username", "#" %>
     </div>
 
     <div class="form-actions float-right">

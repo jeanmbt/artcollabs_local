@@ -1,7 +1,12 @@
-<div class="direct-message-container" id="direct-message-<%= direct_message.id %>">
-  <i class="author">
-    <span><%= direct_message.user.email %></span>
-    <small><%= direct_message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-  </i>
-  <p><%= direct_message.content %></p>
+<div id="message-<%= message.id %>" class="<%= current_user.id == @message.user_id ? 'message-container message-sent' : 'message-container message-received' %>">
+  <div class="<%= current_user.id == message.user_id ? 'msg-sent' : 'msg-received' %>">
+    <div class="message-top">
+      <span class="chat-user"><%= message.user.username %></span>
+      <span class="chat-date"><%= message.created_at.strftime("%a %b %e at %l:%M%p") %></span>
+    </div>
+    <div class="author">
+      <%= image_tag "avatar.jpg" %>
+      <p><%= message.content %></p>
+    </div>
+  </div>
 </div>

@@ -1,12 +1,12 @@
 <%= simple_form_for @project do |f| %>
-  <%= f.input :title %>
-  <%= f.input :description %>
-  <%= f.input :status %>
-  <%= f.input :budget %>
-  <%= f.input :max_members %>
-  <%= f.input :start_date %>
-  <%= f.input :end_date %>
-  <%= f.input :photos %>
+  <%= f.input :title, input_html: { class: "artcollabs-input", maxlength: 56 } %>
+  <%= f.input :description, input_html: { class: "artcollabs-input bio", maxlength: 10000 } %>
+  <%= f.input :tag_list, label: "Tags", input_html: { class: "artcollabs-input" } %>
+  <%= f.input :budget, collection: Project::STATUS, input_html: { class: "artcollabs-input" } %>
+  <%= f.input :max_members, input_html: { class: "artcollabs-input", maxlength: 15 } %>
+  <%= f.input :start_date, input_html: { class: "artcollabs-input" } %>
+  <%= f.input :end_date, input_html: { class: "artcollabs-input" } %>
+  <%= f.input :photo %>
   <div class="float-right">
     <%= f.submit %>
   </div>

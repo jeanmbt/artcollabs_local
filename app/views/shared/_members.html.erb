@@ -3,9 +3,31 @@
           <h4>Collaborators</h4>
         </div>
         <div class="member-card-members">
-          <div class="member">
-            <%= image_tag "avatar.jpg" %>
-            <h6><a href="#">Pandora404</a></h6>
+          <div class="member user-avatar">
+            <%= link_to profile_path(@project.user), class: "a-member" do %>
+              <% if @project.user.avatar.attached? %>
+                <%= image_tag @project.user.avatar %>
+              <% else %>
+                <div class="avatar-member">
+                  <%= render "shared/avatar" %>
+                </div>
+              <% end %>
+              <h6><%= @project.user.username %></h6>
+            <% end %>
           </div>
+          <% @collabs.each do |collab| %>
+            <div class="member user-avatar">
+              <%= link_to profile_path(collab.user_id), class: "a-member" do %>
+                <% if collab.user.avatar.attached? %>
+                  <%= image_tag collab.user.avatar %>
+                <% else %>
+                  <div class="avatar-member">
+                    <%= render "shared/avatar" %>
+                  </div>
+                <% end %>
+                <h6><%= collab.user.username %></h6>
+              <% end %>
+            </div>
+          <% end %>
         </div>
       </div>

@@ -1,18 +1,19 @@
-<h1>Direct Chat</h1>
-<div class="btn-artcollabs" id="direct-messages" data-chatroom-id="<%= @chatroom.id %>">
-  <% @chatroom.direct_messages.each do |direct_message| %>
-    <div class="direct-message-container" id="direct-message-<%= direct_message.id %>">
-      <i class="author">
-        <span><%= direct_message.user.email %></span>
-        <small><%= direct_message.created_at.strftime("%a %b %e at %l:%M%p") %></small>
-      </i>
-      <p><%= direct_message.content %></p>
-    </div>
-  <% end %>
-</div>
+<div class="show-container">
 
-<%= simple_form_for [ @chatroom, @direct_message ], remote: true do |f| %>
-  <%= f.input :content, label: false, placeholder: "Message" %>
-  <%= f.submit %>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-<% end %>
+  <h1>Chat with ...</h1>
+
+        <%= form_for [ @chatroom, @direct_message ], remote: true do |f| %>
+        <div class="chat-input-container">
+            <%= f.text_field :content, label: false, placeholder: "Message to #{}", :input_html => {
+              :id => "input_message" }, class: "chat-input-text" %>
+            <%= submit_tag("Send") %>
+        </div>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        <% end %>
+      <div id="messages" class="overflow-auto" data-chatroom-id="<%= @chatroom.id %>">
+        <% @chatroom.direct_messages.reverse.each do |message| %>
+          <%= render "direct_messages/direct_message", direct_message: direct_message  %>
+        <% end %>
+      </div>
+
+</div>

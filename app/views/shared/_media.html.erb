@@ -1,0 +1,51 @@
+
+  <!-- ⭕ Media gets overwritten when trying to add more files to gallery, create method on projects_controller to manage upload files, link route to a button which triggers upload. HOW?
+  images are not clickable 
+  put them on a modal? 
+  using js?
+  generate html with src = cl_image_tag? -->
+
+    <div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="mediaModalLabel">Upload Media</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+            <%= simple_form_for @project, url: project_path(@project, tab: :media), method: :patch do |f| %>
+              <%= f.input :media, as: :file, input_html: { multiple: true }, class: "choose-btn" %>
+              <%= f.button :submit, "Upload", class: "upload-btn" %>
+            <% end %> 
+          </div>
+          <div class="modal-footer">
+              <!-- activate button if input is not empty -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+
+    <div class="tab-show-container">
+      <div class="flexbin mt-50">
+        
+        <% if @project.media.attached? %>
+          <% @project.media.each do |media| %>
+              <a href="#">
+                <%= image_tag media %>
+              </a>
+          <% end %>  
+        <% end %>
+
+      </div>
+    </div>
+
+<div class="tab-button-container">
+  <button type="button" class="white btn-artcollabs btn-warm-red btn-apply" data-toggle="modal" data-target="#mediaModal">
+      Upload Media
+  </button>
+</div>

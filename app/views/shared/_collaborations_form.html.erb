@@ -1,5 +1,9 @@
 <%= simple_form_for [@project, @collaboration] do |f| %>
-  <%= f.input :role %>
-  <%= f.input :message %>
-  <%= f.submit %>
+  <%= f.input :role,
+              input_html: {class: "artcollabs-input" } %>
+  <%= f.input :message,
+              input_html: {class: "artcollabs-input bio" } %>
+  <div class="float-right">
+    <%= f.button :submit, "Send" %>
+  </div>
 <% end %>

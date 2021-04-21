@@ -44,10 +44,32 @@
     <br>
     <div class="container bg-secondary">
       Project owner:
-      <%= link_to  "Confirm", confirm_path(collab), method: :patch, data: { confirm: "Are you sure?" }, class: "btn btn-success text-right" %>
-      <%= link_to  "  Deny  ", confirm_path(collab), method: :patch, data: { confirm: "Are you sure?" }, class: "btn btn-danger text-right" %>
+      <%= link_to  "Confirm", confirm_path(collab), method: :patch, data: { confirm: "Accept collab?" }, class: "btn btn-success text-right" %>
+      <%= link_to  "  Deny  ", project_collaboration_path(@project, collab), method: :delete, data: { confirm: "Deny Collab ?" } %>
+
     </div>
   <% end %>
 
   <!-- method: :delete, data: { confirm: "delete project named: '#{@project.title}'?" }%-->
 </div>
+
+<!-- KARIN's -->
+<!-- KARIN's -->
+<!-- KARIN's -->
+<!-- KARIN's -->
+
+  <h1><%= @project.title %></h1>
+
+  <% if @user_type == :owner %>
+
+    <%= render "shared/about_owner" %>
+
+  <% elsif @user_type == :collaborator  %>
+
+    <%= render "shared/about_collaborator" %>
+
+  <% else %>
+
+    <%= render "shared/about_visitor" %>
+
+  <% end %>

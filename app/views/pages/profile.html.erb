@@ -1,17 +1,94 @@
-<%= @user.email %>
-<%= link_to "edit your account details", edit_user_registration_path(@user)  %>
+<div class="profile-container">
+  <div class="profile-content">
 
-<h1>My projects</h1>
-<% @projects.each do |project| %>
-  <br><%= link_to "#{project.title}", project_path(project) %>
-  <%= project.status %>
-<% end %>
+    <div class="profile-left">
 
-<br>--------------------- <br>
-<h1>My collabs</h1>
-<% @collaborations.each do |collaboration| %>
-  <br>as <%= collaboration.role %> on
-  <%= link_to "#{collaboration.project.title}", project_path(collaboration.project) %>
-<% end %>
+      <div class="profile-pic user-avatar">
+        <% if @user.avatar.attached? %>
+          <%= image_tag @user.avatar %>
+        <% else %>
+          <%= render "shared/avatar" %>
+        <% end %>
+      </div>
 
-  
+      <div class="profile-bio">
+        <% if @user.bio %>
+          <%= @user.bio %>
+        <% else %>
+          <%= "#{@user.username} has not yet written a bio." %>
+        <% end %>
+      </div>
+
+    </div>
+
+    <div class="profile-right">
+
+      <div class="profile-name">
+        <div class="name-username">
+          <h3><%= @user.first_name %> <%= @user.last_name %></h3>
+          <h6><%= @user.username %></h6>
+        </div>
+
+      </div>
+
+      <div class="profile-tags">
+
+        <div class="profile-taglist">
+          <% if @user.interest_list.length.positive? %>
+            <h5>Interests</h5>
+            <div class="card-tags">
+            <% if @user.interest_list %>
+              <% @user.interest_list.each do |interest| %>
+                <span class="a-tag"><%= link_to interest, users_path(interest: interest) %></span>
+              <% end %>
+            <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="profile-taglist">
+          <% if @user.skill_list.length.positive? %>
+            <h5>Skills</h5>
+            <div class="card-tags">
+            <% if @user.skill_list %>
+              <% @user.skill_list.each do |skill| %>
+                <span class="a-tag"><%= link_to skill, users_path(skill: skill) %></span>
+              <% end %>
+            <% end %>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
+
+
+        <div class="profile-linklist">
+          <% if @user.links.present? %>
+            <h5>Links</h5>
+            <div class="links">
+              <% @user.links.each do |link|  %>
+
+                  <%= link_to link.title, link.url, class: "link-item" %>
+                  <% if @user == current_user %>
+                      <%= link_to link_path(link), class: "delete-link", method: :delete, data: { confirm: "Delete the link?" } do %>
+                        <i class='fas fa-times-circle'></i>
+                      <% end %>
+                  <% end %>
+
+              <% end %>
+            </div>
+          <% end %>
+
+          <% if @user == current_user %>
+          <br>
+            <div class="float-right" style="margin-right: 100px;">
+              <%= link_to "Add a Link", new_link_path, class: "white btn-artcollabs btn-profile" %>
+            </div>
+          <% end %>
+
+        </div>
+
+    </div>
+
+  </div>
+</div>
