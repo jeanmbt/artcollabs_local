@@ -74,15 +74,22 @@ input[type="text"]:focus {
 
 .collection-card {
   border-radius: 20px;
-  width: 220px;
+  width: 10rem;
   height: 360px;
   background: $light-blue;
+  background-position: center center;
+  background-size: cover;
   font-family: "futurateemed", Futura, Helvetica, sans-serif;
   text-transform: uppercase;
   font-size: 16pt;
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+    a {
+      color: $warm-red !important;
+      &:hover {
+        color: white !important;
+      }
+    }
 }
 
